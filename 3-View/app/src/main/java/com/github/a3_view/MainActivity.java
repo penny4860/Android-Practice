@@ -13,10 +13,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.iv_like).setOnClickListener(this);
+        findViewById(R.id.iv_share).setOnClickListener(this);
+
     }
 
     public void onClick(View v)
     {
-        Toast.makeText(this, "Click", Toast.LENGTH_SHORT).show();
+        switch (v.getId())
+        {
+            case R.id.iv_like:
+                Toast.makeText(this, "Like Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.iv_share:
+                Toast.makeText(this, "Share Clicked", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
     }
 }
