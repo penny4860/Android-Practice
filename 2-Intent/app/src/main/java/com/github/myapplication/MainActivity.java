@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_DIAL);
+        Intent intent;
+        intent = new Intent(MainActivity.this, CallActivity.class);
         startActivity(intent);
         
     }
