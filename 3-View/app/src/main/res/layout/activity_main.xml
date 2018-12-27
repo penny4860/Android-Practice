@@ -12,6 +12,11 @@
         android:layout_height="wrap_content"
         android:textSize="48dp"
         android:textColor="#ff0000"
-        android:text="Hello World!" />
+        android:text="Style Example" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/style"/>
+    
 </android.support.constraint.ConstraintLayout>
