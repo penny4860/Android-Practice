@@ -9,6 +9,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // res/layout/activity_main.xml file 에 정의되어있는
+        // widget/layout 정보와 mapping
         setContentView(R.layout.activity_main);
     }
 
