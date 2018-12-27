@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent;
         intent = new Intent(MainActivity.this, CallActivity.class);
+
+        // 호출하는 activity에 message를 전송
+        intent.putExtra("intent-message", "send-message from main activity!!!!!");
         startActivity(intent);
         
     }

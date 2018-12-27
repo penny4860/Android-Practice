@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 public class CallActivity extends AppCompatActivity {
 
@@ -24,6 +25,10 @@ public class CallActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        // main activity 가 보낸 message 를 받는다.
+        String msg = getIntent().getStringExtra("intent-message");
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
 }
