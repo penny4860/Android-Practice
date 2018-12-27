@@ -39,7 +39,24 @@
         android:background="#000000"
         />
 
-    <include layout="@layout/item_post"/>
-    <include layout="@layout/item_post"/>
+    <!--스크롤뷰 안에서 정의한 layout은 스크롤 형태로 정돈된다. !!-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/item_post"/>
+            <include layout="@layout/item_post"/>
+            <include layout="@layout/item_post"/>
+            <include layout="@layout/item_post"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+    
 
 </LinearLayout>
