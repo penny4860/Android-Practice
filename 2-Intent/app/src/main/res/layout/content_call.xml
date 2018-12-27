@@ -8,4 +8,10 @@
     tools:context=".CallActivity"
     tools:showIn="@layout/activity_call">
 
+    <TextView
+        android:textSize="36dp"
+        android:text="CALL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </android.support.constraint.ConstraintLayout>
