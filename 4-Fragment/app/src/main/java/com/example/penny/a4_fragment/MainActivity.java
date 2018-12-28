@@ -3,7 +3,7 @@ package com.example.penny.a4_fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnColorButtonListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,5 +13,11 @@ public class MainActivity extends AppCompatActivity {
         GreenFragment greenFragment = new GreenFragment();
 
         getSupportFragmentManager().beginTransaction().add(R.id.fl_fragment, greenFragment).commit();
+    }
+
+    // 0: red 1: green 2: blue
+    @Override
+    public void onColorClick(int color) {
+
     }
 }
