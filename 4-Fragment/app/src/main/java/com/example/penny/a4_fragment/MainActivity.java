@@ -10,10 +10,6 @@ public class MainActivity extends AppCompatActivity implements OnColorButtonList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        GreenFragment greenFragment = new GreenFragment();
-
-        getSupportFragmentManager().beginTransaction().add(R.id.fl_fragment, greenFragment).commit();
     }
 
     // 0: red 1: green 2: blue
@@ -36,6 +32,12 @@ public class MainActivity extends AppCompatActivity implements OnColorButtonList
             default:
                 fragment = new BlueFragment();
         }
+
+        // 런타임에 액티비티에 프래그먼트 추가하는 과정
+        // 1) getSupportFragmentManager()를 호출하여 FragmentManager를 가져옵니다.
+        // 2) beginTransaction()을 호출하여 FragmentTransaction을 생성
+        // 3) add()를 호출하여 특정 Resource에 프래그먼트를 추가합니다.
+        //      resouce/fragment
         getSupportFragmentManager().beginTransaction().add(R.id.fl_fragment, fragment).commit();
 
     }
