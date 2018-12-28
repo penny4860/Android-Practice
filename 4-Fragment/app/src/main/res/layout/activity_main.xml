@@ -10,20 +10,14 @@
 
 
     <fragment
+        android:id="@+id/fragment_left"
         android:name="com.example.penny.a4_fragment.LeftFragment"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent" />
 
     <FrameLayout
-        android:background="#dccf1b"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        />
-
-    <FrameLayout
-        android:background="#14a6e4"
+        android:background="#edf2f4"
         android:layout_weight="2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
