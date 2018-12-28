@@ -16,7 +16,9 @@
         android:layout_width="0dp"
         android:layout_height="match_parent" />
 
+    <!--fragment용 레이아웃-->
     <FrameLayout
+        android:id="@+id/fl_fragment"
         android:background="#edf2f4"
         android:layout_weight="2"
         android:layout_width="0dp"
