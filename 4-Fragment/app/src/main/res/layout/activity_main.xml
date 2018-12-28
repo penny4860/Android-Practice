@@ -11,8 +11,9 @@
 
     <fragment
         android:name="com.example.penny.a4_fragment.LeftFragment"
-        android:layout_width=""
-        android:layout_height=""
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
 
     <FrameLayout
         android:background="#dccf1b"
