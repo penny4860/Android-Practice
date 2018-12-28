@@ -8,6 +8,7 @@
     tools:context=".LeftFragment">
 
     <View
+        android:id="@+id/v_red"
         android:background="#cf3b3b"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -15,6 +16,7 @@
         />
 
     <View
+        android:id="@+id/v_green"
         android:background="#99cf3b"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -22,6 +24,7 @@
         />
 
     <View
+        android:id="@+id/v_blue"
         android:background="#763bcf"
         android:layout_width="match_parent"
         android:layout_height="0dp"
