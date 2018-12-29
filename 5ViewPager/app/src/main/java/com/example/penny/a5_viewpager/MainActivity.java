@@ -1,5 +1,7 @@
 package com.example.penny.a5_viewpager;
 
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -27,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
         //  Fragment 객체를 ViewPager 객체에 전달하는 역할
         MyPagerAdaptor adaptor = new MyPagerAdaptor(getSupportFragmentManager(), arrFragments);
         viewPager.setAdapter(adaptor);
+
+        // 4. TabLayout을 생성하고 viewPager 에 연결
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tl_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
     }
 
     // Fragment 객체를 Pager 에 전달하기 위한 Adaptor
@@ -47,6 +54,27 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             return arrFragments.length;
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+
+            CharSequence title = "";
+            switch (position)
+            {
+                case 0:
+                    title = "Red";
+                    break;
+                case 1:
+                    title = "Green";
+                    break;
+                case 2:
+                    title = "Yellow";
+                    break;
+            }
+
+            return title;
         }
     }
 }
