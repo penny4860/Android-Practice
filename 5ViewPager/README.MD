@@ -1,6 +1,8 @@
 
 ## View Pager
 
+<img src="img.png">
+
 * 안드로이드 앱에서 각 Tab을 swap으로 이동하는 기능
 * Main Activity
 	* 각각의 Tab을 객체로 보유
