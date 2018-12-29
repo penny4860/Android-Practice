@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BLueFragment extends Fragment {
+public class YelloFragment extends Fragment {
 
 
-    public BLueFragment() {
+    public YelloFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +23,7 @@ public class BLueFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_red, container, false);
+        return inflater.inflate(R.layout.fragment_yello, container, false);
     }
 
 }
