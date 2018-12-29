@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 3. Adaptor 객체 생성
         //  Fragment 객체를 ViewPager 객체에 전달하는 역할
-        MyPagerAdaptor adaptor = new MyPagerAdaptor(getSupportFragmentManager(), arrFragments);.
+        MyPagerAdaptor adaptor = new MyPagerAdaptor(getSupportFragmentManager(), arrFragments);
         viewPager.setAdapter(adaptor);
     }
 
