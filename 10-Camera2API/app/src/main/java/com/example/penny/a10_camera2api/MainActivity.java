@@ -294,4 +294,22 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Log.e(TAG, "onResume");
+        startBackgroundThread();
+        if (textureView.isAvailable()) {
+            openCamera();
+        } else {
+            textureView.setSurfaceTextureListener(textureListener);
+        }
+    }
+    @Override
+    protected void onPause() {
+        //Log.e(TAG, "onPause");
+        //closeCamera();
+        stopBackgroundThread();
+        super.onPause();
+    }
 }
