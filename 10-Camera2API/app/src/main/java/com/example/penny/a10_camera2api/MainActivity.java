@@ -68,6 +68,26 @@ public class MainActivity extends AppCompatActivity {
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
 
+    private final CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
+        @Override
+        public void onOpened(CameraDevice camera) {
+            //This is called when the camera is open
+            //Log.e(TAG, "onOpened");
+            cameraDevice = camera;
+            createCameraPreview();
+        }
+        @Override
+        public void onDisconnected(CameraDevice camera) {
+            cameraDevice.close();
+        }
+        @Override
+        public void onError(CameraDevice camera, int error) {
+            cameraDevice.close();
+            cameraDevice = null;
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
