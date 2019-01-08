@@ -88,15 +88,15 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-
+    // 2. onCreate() 구현
+    // texture view와 button에 대한 listener를 mapping
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // textureView 의 listener : camera preview
         textureView = (TextureView) findViewById(R.id.textureView);
-
-        // SurfaceTextureListener listener : 익명 class -> interface를 구현하면서 instance를 생성
         textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
 
             @Override
@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // btnCapture 의 listener : takePicture
         btnCapture = (Button) findViewById(R.id.btnCapture);
         btnCapture.setOnClickListener(new View.OnClickListener(){
 
@@ -129,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
