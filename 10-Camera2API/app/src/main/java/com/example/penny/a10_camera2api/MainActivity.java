@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    // 3. textureListener 객체 생성
+    // 2. textureListener 객체 생성
     private TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    // 2. onCreate() 구현
+    // 3. onCreate() 구현
     // texture view와 button에 대한 listener를 mapping
     @Override
     protected void onCreate(Bundle savedInstanceState) {
