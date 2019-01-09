@@ -106,8 +106,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    // 3. onCreate() 구현
-    // texture view와 button에 대한 listener를 mapping
+    // 3. onCreate() 구현 : texture view와 button에 대한 listener를 mapping
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,6 +126,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    // 4. onResume() 구현 : mBackgroundRunner 시작 & openCamera
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Log.e(TAG, "onResume");
+
+        mBackgroundRunner.startBackgroundThread();
+        if (textureView.isAvailable()) {
+            openCamera();
+        } else {
+            textureView.setSurfaceTextureListener(textureListener);
+        }
+    }
+
+    // 5. onPause() 구현 : mBackgroundRunner 중지
+    @Override
+    protected void onPause() {
+        //Log.e(TAG, "onPause");
+        //closeCamera();
+        mBackgroundRunner.stopBackgroundThread();
+        super.onPause();
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CAMERA_PERMISSION) {
+            if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                // close the app
+                Toast.makeText(this, "Sorry!!!, you can't use this app without granting permission", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        }
+    }
+
 
     // 4. takePicture() : capture button에 대한 listener
     private void takePicture()
@@ -284,36 +318,6 @@ public class MainActivity extends AppCompatActivity {
 //        Log.e(TAG, "openCamera X");
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CAMERA_PERMISSION) {
-            if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                // close the app
-                Toast.makeText(this, "Sorry!!!, you can't use this app without granting permission", Toast.LENGTH_LONG).show();
-                finish();
-            }
-        }
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //Log.e(TAG, "onResume");
-
-        mBackgroundRunner.startBackgroundThread();
-        if (textureView.isAvailable()) {
-            openCamera();
-        } else {
-            textureView.setSurfaceTextureListener(textureListener);
-        }
-    }
-    @Override
-    protected void onPause() {
-        //Log.e(TAG, "onPause");
-        //closeCamera();
-        mBackgroundRunner.stopBackgroundThread();
-        super.onPause();
-    }
 
 
 }
