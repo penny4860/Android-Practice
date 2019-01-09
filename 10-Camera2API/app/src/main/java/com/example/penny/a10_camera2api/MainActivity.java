@@ -17,8 +17,6 @@ import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnCapture;
     private TextureView textureView;
 
+    private BackgroundRunner mBackgroundRunner = new BackgroundRunner();
+
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     static{
         ORIENTATIONS.append(Surface.ROTATION_0, 0);
@@ -65,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
     private File file;
     private static final int REQUEST_CAMERA_PERMISSION = 200;
     private boolean mFlashSupported;
-    private Handler mBackgroundHandler;
-    private HandlerThread mBackgroundThread;
 
     // 1. stateCallback 객체 생성 : A callback objects for receiving updates about the state of a camera device.
     private final CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
@@ -195,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             };
-            reader.setOnImageAvailableListener(readerListener, mBackgroundHandler);
+            reader.setOnImageAvailableListener(readerListener, mBackgroundRunner.getBackgroundHandler());
             final CameraCaptureSession.CaptureCallback captureListener = new CameraCaptureSession.CaptureCallback() {
                 @Override
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
@@ -208,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onConfigured(CameraCaptureSession session) {
                     try {
-                        session.capture(captureBuilder.build(), captureListener, mBackgroundHandler);
+                        session.capture(captureBuilder.build(), captureListener, mBackgroundRunner.getBackgroundHandler());
                     } catch (CameraAccessException e) {
                         e.printStackTrace();
                     }
@@ -216,13 +214,13 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onConfigureFailed(CameraCaptureSession session) {
                 }
-            }, mBackgroundHandler);
+            }, mBackgroundRunner.getBackgroundHandler());
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
     }
 
-    // 5.
+    // 5. createCameraPreview()
     private void createCameraPreview() {
         try {
             SurfaceTexture texture = textureView.getSurfaceTexture();
@@ -259,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
         }
         captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
         try {
-            cameraCaptureSessions.setRepeatingRequest(captureRequestBuilder.build(), null, mBackgroundHandler);
+            cameraCaptureSessions.setRepeatingRequest(captureRequestBuilder.build(), null, mBackgroundRunner.getBackgroundHandler());
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
@@ -301,7 +299,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //Log.e(TAG, "onResume");
-        startBackgroundThread();
+
+        mBackgroundRunner.startBackgroundThread();
         if (textureView.isAvailable()) {
             openCamera();
         } else {
@@ -312,23 +311,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         //Log.e(TAG, "onPause");
         //closeCamera();
-        stopBackgroundThread();
+        mBackgroundRunner.stopBackgroundThread();
         super.onPause();
     }
 
-    protected void startBackgroundThread() {
-        mBackgroundThread = new HandlerThread("Camera Background");
-        mBackgroundThread.start();
-        mBackgroundHandler = new Handler(mBackgroundThread.getLooper());
-    }
-    protected void stopBackgroundThread() {
-        mBackgroundThread.quitSafely();
-        try {
-            mBackgroundThread.join();
-            mBackgroundThread = null;
-            mBackgroundHandler = null;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+
 }
+
