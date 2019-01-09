@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    // 4. takePicture() : capture button에 대한 listener
     private void takePicture()
     {
         if(null == cameraDevice) {
@@ -222,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // 5.
     private void createCameraPreview() {
         try {
             SurfaceTexture texture = textureView.getSurfaceTexture();
